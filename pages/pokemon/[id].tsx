@@ -96,7 +96,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
                                 justifyContent: 'space-between',
                             }}
                         >
-                            <Text h1 transform='capitalize'>
+                            <Text h3 transform='capitalize'>
                                 {pokemon.name}
                             </Text>
                             <Button
