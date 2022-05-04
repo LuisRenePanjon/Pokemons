@@ -13,6 +13,8 @@ import {
     Container,
     Image,
 } from '@nextui-org/react';
+import { useEffect, useState } from 'react';
+import { localStFavorites } from '../../utils';
 
 interface Props {
     pokemon: PokemonResponse;
@@ -20,6 +22,15 @@ interface Props {
 
 const PokemonPage: NextPage<Props> = ({ pokemon }) => {
     const { query } = useRouter();
+
+    const [isInFavorites, setIsInFavorites] = useState(
+        localStFavorites.existPokemonInFavorites(pokemon.id)
+    );
+
+    const onToggleFavorite = () => {
+        localStFavorites.toggleFavorite(pokemon.id);
+        setIsInFavorites(!isInFavorites);
+    };
 
     return (
         <MainLayout title={pokemon.name}>
@@ -88,8 +99,14 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
                             <Text h1 transform='capitalize'>
                                 {pokemon.name}
                             </Text>
-                            <Button color={'gradient'} ghost>
-                                Añadir a favoritos 💕
+                            <Button
+                                color={'gradient'}
+                                ghost={isInFavorites}
+                                onClick={onToggleFavorite}
+                            >
+                                {!isInFavorites ?
+                                'Añadir a favoritos 💕' : 'Quitar de favoritos 💔'}
+                        
                             </Button>
                         </Card.Header>
                         <Card.Body>
@@ -138,35 +155,6 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
                         </Card.Body>
                     </Card>
                 </Grid>
-                {/* <Grid xs={12} sm={8}>
-                    <Card css={{ w: '100%', h: '100%', p: 0 }}>
-                        <Card.Header>
-                            <Row justify='space-between'>
-                                <Text h3>{pokemon.name}</Text>
-                                <Text
-                                    css={{
-                                        color: '$accents4',
-                                        fontWeight: '$semibold',
-                                    }}
-                                >
-                                    {pokemon.id}
-                                </Text>
-                            </Row>
-                        </Card.Header>
-                        <Card.Body>
-                            <Card.Image
-                                src={
-                                    pokemon.sprites.other?.dream_world
-                                        ?.front_default || 'no-img'
-                                }
-                                width='100%'
-                                height={'100%'}
-                                objectFit='contain'
-                                alt='Pokemon image'
-                            />
-                        </Card.Body>
-                    </Card>
-                </Grid> */}
             </Grid.Container>
         </MainLayout>
     );
