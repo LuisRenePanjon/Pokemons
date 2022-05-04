@@ -88,7 +88,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
                         </Card.Footer>
                     </Card>
                 </Grid>
-                <Grid xs={6} sm={8}>
+                <Grid xs={12} sm={4}>
                     <Card>
                         <Card.Header
                             css={{
