@@ -20,7 +20,7 @@ export const MainLayout: FC<Props> = ({ children, title }) => {
                 <meta name='keywords' content='pokemon, pokedex' />
                 <meta
                     property='og:title'
-                    content={`App to show pokemon information - ${title}}`}
+                    content={`App to show pokemon information - ${title}`}
                 />
                 <meta
                     property='og:description'
