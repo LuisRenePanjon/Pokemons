@@ -18,13 +18,21 @@ const existPokemonInFavorites = (id: number) => {
         localStorage.getItem('favorites') || '[]'
     );
     // console.log(favorites.includes(id));
-    
+
     return favorites.includes(id);
+};
+
+const getFavoritePokemons = (): number[] => {
+    const favorites: number[] = JSON.parse(
+        localStorage.getItem('favorites') || '[]'
+    );
+    return favorites;
 };
 
 const exportedObject = {
     toggleFavorite,
     existPokemonInFavorites,
-}
+    getFavoritePokemons,
+};
 
 export default exportedObject;
